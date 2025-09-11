@@ -1,11 +1,11 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Main",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#00DE97",
+    "light": "#00DE97",
+    "dark": "#00DE97"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -50,7 +50,7 @@
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Referência da API",
         "groups": [
           {
             "group": "Módulos",
@@ -105,14 +105,14 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Suporte",
+        "href": "mailto:wallison.costa@vert.com.br"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Página",
+      "href": "https://agents-store.alfred.vert.com.br"
     }
   },
   "contextual": {
@@ -129,9 +129,10 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "instagram": "https://www.instagram.com/vertanalytics",
+      "linkedin": "https://www.linkedin.com/company/vertanalytics/",
+      "youtube": "https://www.youtube.com/channel/UCKaLCLFtJ8BFtM89x5E1lZA",
+      "website": "https://www.vertanalytics.com.br"
     }
   }
 }
