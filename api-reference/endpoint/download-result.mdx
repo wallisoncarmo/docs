@@ -1,0 +1,16 @@
+
+## `docs/api-reference/endpoint/download-result.mdx`
+```mdx
+---
+title: Download — Parecer (PDF)
+---
+
+# GET /main-agent/v1/agent-message/download/{execution_id}
+
+Baixa o artefato final da execução (**parecer.pdf**).
+
+### Exemplo (cURL)
+```bash
+curl -L -H "Authorization: Bearer $API_KEY" \
+  -o parecer.pdf \
+  "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-message/download/abc123"

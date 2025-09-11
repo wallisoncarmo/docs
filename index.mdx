@@ -1,97 +1,142 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "Main Agents Store"
+description: "Plataforma de agentes de IA com uso via interface (chat/fluxos) e APIs. Comece em minutos: faça upload dos documentos, acompanhe o status e baixe o parecer em PDF."
 ---
 
-## Setting up
+# Main Agents Store
 
-Get your documentation site up and running in minutes.
+O **Main Agents Store** é uma plataforma de **agentes de IA** que pode ser usada:
+- pela **interface web** (chat e fluxos guiados), ou
+- via **API** (para integrar nos seus sistemas).
 
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
+Atualmente disponíveis:
+- **Contestação de Infração de Trânsito** → gera **parecer jurídico em PDF** a partir de documentos obrigatórios.  
+- **Litigância Abusiva** → mede **similaridade** entre petições e **estatísticas** por advogado (OAB/Nome).  
+- **OCR** → extrai texto de PDFs/imagens.  
+- **Transcrição + Resumo** → converte áudio em texto (Whisper) e produz um resumo.
 
-## Make it yours
+> Dica: nas páginas de *Workflows* você pode incluir **imagens do passo a passo** da interface.
 
-Design a docs site that looks great and empowers your users.
+---
 
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
-  </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
-  </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
-  </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
-  </Card>
-</Columns>
+## Como funciona (visão geral)
 
-## Create beautiful pages
+**Pela Interface (UI)**
+1. Escolha um **agente** (ex.: Contestação de Infração).  
+2. **Envie os documentos** solicitados.  
+3. Acompanhe o **status**.  
+4. **Baixe o resultado** (PDF/JSON).
 
-Everything you need to create world-class documentation.
+**Pela API**
+1. `POST /agent-task/upload/{agent}/{task}` → recebe `execution_id`.  
+2. `GET /agent-message/process/{execution_id}` → *polling* de status.  
+3. `GET /agent-message/download/{execution_id}` → baixa o artefato final (PDF/JSON).
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+---
 
-## Need inspiration?
+## Requisitos & Autenticação
 
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+- **API Key** no header:
+```http
+Authorization: Bearer &lt;API_KEY&gt;
+```
+
+- **Base URL (produção):**
+```
+https://agents-store-api.alfred.vert.com.br
+```
+
+- **Prefixo principal:**
+```
+/main-agent/v1
+```
+
+---
+
+## Quickstart (API) — Contestação de Infração
+
+### 1) Upload dos documentos
+Documentos aceitos pelo agente `contestacao_infracao` (tarefa `contestacao`):
+- `procuracao`, `crlv`, `cnh`, `alegacao2`, `ait`, `ait_radar_expirado` (opcional conforme o caso).
+
+```bash
+curl -X POST "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-task/upload/contestacao_infracao/contestacao"   -H "Authorization: Bearer $API_KEY"   -F "procuracao=@/caminho/procuracao.pdf"   -F "crlv=@/caminho/crlv.pdf"   -F "cnh=@/caminho/cnh.pdf"   -F "alegacao2=@/caminho/alegacao2.pdf"   -F "ait=@/caminho/ait.pdf"   -F "ait_radar_expirado=@/caminho/ait_radar.pdf"
+```
+
+**Resposta**
+```json
+{ "execution_id": "abc123" }
+```
+
+### 2) Consultar status
+```bash
+curl -H "Authorization: Bearer $API_KEY"   "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-message/process/abc123"
+```
+
+Exemplos de resposta:
+```json
+{ "execution_id": "abc123", "status": "PENDING" }
+```
+```json
+{ "execution_id": "abc123", "status": "RUNNING", "message": "processando..." }
+```
+```json
+{ "execution_id": "abc123", "status": "DONE" }
+```
+```json
+{ "execution_id": "abc123", "status": "ERROR", "error": "detalhes..." }
+```
+
+### 3) Download do parecer (PDF)
+```bash
+curl -L -H "Authorization: Bearer $API_KEY"   -o parecer.pdf   "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-message/download/abc123"
+```
+
+> Endpoints detalhados:  
+> - [Upload — Contestação](/api-reference/endpoint/upload-contestacao)  
+> - [Polling de status](/api-reference/endpoint/poll-status)  
+> - [Download do resultado](/api-reference/endpoint/download-result)
+
+---
+
+## Agents disponíveis
+
+- **Contestação de Infração**  
+  Documentos exigidos, validações e saída em PDF.  
+  → [Ver agente](/agents/contestacao-infracao) · [Workflow UI/API](/workflows/contestacao-infracao)
+
+- **Litigância Abusiva**  
+  Similaridade entre petições + extração de Advogados (OAB/Nome) e contagem por advogado.  
+  → [Ver agente](/agents/litigancia-abusiva) · [Workflow](/workflows/litigancia-abusiva)
+
+- **OCR**  
+  Extração de texto de PDFs/imagens (JSON/Texto).  
+  → [Ver serviço](/agents/ocr)
+
+- **Transcrição + Resumo (Whisper)**  
+  Áudio → Texto + resumo subsequente.  
+  → [Ver serviço](/agents/transcricao)
+
+---
+
+## Erros comuns
+
+- **400** Arquivo ausente/inválido  
+- **401** Token ausente/inválido  
+- **404** `execution_id` não encontrado  
+- **422** Combinação de documentos inválida para o agente  
+- **500** Erro interno (tente reprocessar)
+
+→ [Tabela completa de erros](/api-reference/errors)
+
+---
+
+## Próximos passos
+
+- Ver **Workflows com prints da interface** (UI)  
+  → [Contestação de Infração](/workflows/contestacao-infracao) · [Litigância Abusiva](/workflows/litigancia-abusiva)
+
+- Explorar a **API reference**  
+  → [Endpoints principais](/api-reference/endpoint/upload-contestacao)
+
+- Configurar **ambientes, headers e boas práticas** (separar página futuramente, se desejar).

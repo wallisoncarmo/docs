@@ -1,0 +1,27 @@
+---
+title: "Módulo — Erros & Tratamento"
+description: "Padrões de erro e dicas de tratamento em cliente."
+---
+
+# Erros & Tratamento
+
+Padrão de erro comum retornado pela API:
+
+```json
+{
+  "detail": [
+    {
+      "loc": ["campo", 0],
+      "msg": "Descrição do erro",
+      "type": "tipo_erro"
+    }
+  ]
+}
+```
+
+## Códigos comuns
+- **400 Bad Request** — arquivo ausente/inválido.
+- **401 Unauthorized** — token ausente/inválido.
+- **404 Not Found** — `execution_id` inexistente.
+- **422 Unprocessable Entity** — combinação de documentos inválida para a tarefa.
+- **500 Internal Server Error** — falha interna. Tente reprocessar e acione suporte se persistir.

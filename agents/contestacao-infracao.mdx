@@ -1,0 +1,23 @@
+---
+title: Agente — Contestação de Infração
+description: Gera parecer jurídico em PDF a partir dos documentos fornecidos.
+---
+
+# Contestação de Infração
+
+O agente **contestacao_infracao** produz um **parecer jurídico em PDF** para defesa/contestação de multas.
+
+## Documentos exigidos
+- **procuracao** (PDF)
+- **crlv** (PDF)
+- **cnh** (PDF)
+- **alegacao2** (PDF com a alegação do caso)
+- **ait** (PDF do Auto de Infração)
+- **ait_radar_expirado** (PDF, quando aplicável)
+
+## Formas de envio
+- **Interface Web (UI)**: upload dos arquivos pelo fluxo guiado.
+- **API**: `POST /main-agent/v1/agent-task/upload/contestacao_infracao/contestacao`.
+
+## Saída
+- **parecer.pdf** (download via `GET /agent-message/download/{execution_id}`).

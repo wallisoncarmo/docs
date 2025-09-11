@@ -1,0 +1,36 @@
+---
+title: "Módulo — Créditos & Uso"
+description: "Como consultar a utilização de créditos do Main Agents Store."
+---
+
+# Créditos & Uso
+
+Consulte a utilização de créditos da sua conta.
+
+## Endpoint
+
+```
+GET /main-agent/v1/agent-credit/credit/usage
+```
+
+### Exemplo (cURL)
+```bash
+curl --location "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-credit/credit/usage"   --header "accept: application/json"   --header "Authorization: Bearer <JWT>"
+```
+
+### Resposta
+A resposta pode variar conforme a política de créditos implementada. Exemplo genérico:
+
+```json
+{
+  "total": 10000,
+  "used": 2500,
+  "remaining": 7500,
+  "by_agent": [
+    { "agent": "contestacao_infracao", "used": 1200 },
+    { "agent": "litigancia_abusiva", "used": 800 },
+    { "agent": "ocr", "used": 300 },
+    { "agent": "transcricao", "used": 200 }
+  ]
+}
+```

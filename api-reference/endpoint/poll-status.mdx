@@ -1,0 +1,48 @@
+
+## `docs/api-reference/endpoint/poll-status.mdx`
+```mdx
+---
+title: Status — Polling da execução
+---
+
+# GET /main-agent/v1/agent-message/process/{execution_id}
+
+Retorna o **status** da execução.
+
+## Exemplo de resposta
+```json
+{ "execution_id": "abc123", "status": "RUNNING", "message": "processando..." }
+
+
+Valores possíveis de status: PENDING | RUNNING | DONE | ERROR.
+
+Exemplo de polling (bash)
+
+EXEC=abc123
+while true; do
+  R=$(curl -s -H "Authorization: Bearer $API_KEY" \
+    "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-message/process/$EXEC")
+  echo "$R"
+  STATUS=$(echo "$R" | jq -r '.status')
+  [ "$STATUS" = "DONE" ] && break
+  [ "$STATUS" = "ERROR" ] && exit 1
+  sleep 3
+done
+
+
+
+## `docs/api-reference/endpoint/download-result.mdx`
+```mdx
+---
+title: Download — Parecer (PDF)
+---
+
+# GET /main-agent/v1/agent-message/download/{execution_id}
+
+Baixa o artefato final da execução (**parecer.pdf**).
+
+### Exemplo (cURL)
+```bash
+curl -L -H "Authorization: Bearer $API_KEY" \
+  -o parecer.pdf \
+  "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-message/download/abc123"

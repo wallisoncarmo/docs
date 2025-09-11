@@ -1,0 +1,54 @@
+---
+title: "Módulo — Status de Processamento (Polling)"
+description: "Como acompanhar o status de uma execução a partir do execution_id."
+---
+
+# Status de Processamento
+
+Após o upload, você receberá um `execution_id`. Use-o para **consultar o status**.
+
+## Endpoint
+
+```
+GET /main-agent/v1/agent-message/process/{execution_id}
+```
+
+### Exemplo (cURL)
+```bash
+curl --location --globoff "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-message/process/<EXECUTION_ID>"   --header "accept: application/json"   --header "Authorization: Bearer <JWT>"
+```
+
+### Resposta (exemplo)
+```json
+{
+  "execution_id": "string",
+  "status": "PENDING | RUNNING | DONE | ERROR",
+  "extracao_ocr": [
+    {
+      "id": 0,
+      "execution_id": "string",
+      "result": "string",
+      "arquivo": "string",
+      "extracao": "string",
+      "status": "string"
+    }
+  ],
+  "extracao_assistant": {
+    "resumo_solicitacao_requerente": "string",
+    "documento_assinado": [
+      {
+        "nomeDocumento": "string",
+        "eletronicamente_assinado": true,
+        "data_assinatura": "string",
+        "signatario": "string"
+      }
+    ]
+  },
+  "duracao": 0,
+  "percent": 0,
+  "total_process": 0,
+  "total_file": 0
+}
+```
+
+> **Dica:** implemente polling com intervalo de 2–5 segundos e **timeouts** adequados.

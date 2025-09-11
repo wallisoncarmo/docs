@@ -1,0 +1,27 @@
+---
+title: "Módulo — Tarefas (Upload/Execução)"
+description: "Como enviar documentos para iniciar a execução de uma tarefa de agente."
+---
+
+# Tarefas (Upload/Execução)
+
+Para **iniciar** uma execução, envie os arquivos da tarefa do agente.
+
+## Endpoint genérico
+
+```
+POST /main-agent/v1/agent-task/upload/{service_name_agent}/{service_name_task}
+```
+
+Por exemplo, para o agente `contestacao_infracao` e a task `contestacao`:
+
+```
+POST /main-agent/v1/agent-task/upload/contestacao_infracao/contestacao
+```
+
+### Exemplo (cURL)
+```bash
+curl --location "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-task/upload/contestacao_infracao/contestacao"   --header "accept: application/json"   --header "Authorization: Bearer <JWT>"   --form "files=@"/caminho/para/algum_documento.pdf""
+```
+
+> **Observação:** Algumas tarefas exigem **vários arquivos** (ex.: procuracao, crlv, cnh, alegacao2, ait, ait_radar_expirado). Consulte a documentação do agente específico para os **campos obrigatórios**.

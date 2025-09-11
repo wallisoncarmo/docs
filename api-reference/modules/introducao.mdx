@@ -1,0 +1,20 @@
+---
+title: "Introdução aos Módulos da API"
+description: "Visão geral dos módulos da API do Main Agents Store e como navegar entre eles."
+---
+
+Esta seção organiza a documentação da API em **módulos** para facilitar a navegação e a implementação.
+
+## Estrutura
+
+- **Autenticação** — obtenha o *access_token* (JWT) para usar em todos os endpoints.
+- **Agentes**
+  - **Catálogo de Agentes** — descubra `service_name_agent` e tarefas disponíveis.
+  - **Tarefas (Upload/Execução)** — envie arquivos e inicie uma execução.
+  - **Status de Processamento (Polling)** — acompanhe via `execution_id`.
+  - **Download de Resultados** — baixe o parecer/artefato final.
+- **Créditos**
+  - **Consultar créditos** — veja o consumo e saldo.
+- **Erros & Tratamento** — códigos e payloads de erro mais comuns.
+
+> Dica: copie os exemplos de cURL e adapte com seu **JWT** e caminhos de arquivos.

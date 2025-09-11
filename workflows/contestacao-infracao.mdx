@@ -1,0 +1,23 @@
+---
+title: Workflow — Contestação de Infração
+---
+
+# Workflow — Contestação de Infração
+
+## Pela Interface (UI)
+1. Abra o módulo **Contestação de Infrações**.
+2. Envie os documentos exigidos.
+3. Acompanhe o **status** da execução na tela.
+4. Faça o **download do parecer.pdf** ao concluir.
+
+> Dica: inclua aqui **imagens do fluxo** (upload, progresso e download).
+
+## Pela API (resumo)
+1) **Upload**  
+`POST /main-agent/v1/agent-task/upload/contestacao_infracao/contestacao`
+
+2) **Status**  
+`GET /main-agent/v1/agent-message/process/{execution_id}`
+
+3) **Download (PDF)**  
+`GET /main-agent/v1/agent-message/download/{execution_id}`

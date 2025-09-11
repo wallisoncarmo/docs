@@ -1,0 +1,52 @@
+---
+title: "Módulo — Autenticação"
+description: "Como obter e usar o access_token para consumir as APIs do Main Agents Store."
+---
+
+# Autenticação
+
+Para consumir qualquer endpoint, primeiro obtenha um **access_token** via **usuário e senha**.
+
+> **Importante:** Não versionar credenciais. Use variáveis de ambiente/secret manager.
+
+## Endpoint
+
+```
+POST /main-agent/v1/auth
+```
+
+### Requisição (JSON)
+```json
+{
+  "username": "<SEU_USUARIO>",
+  "password": "<SUA_SENHA>"
+}
+```
+
+### Exemplo (cURL)
+```bash
+curl --location --globoff "https://agents-store-api.alfred.vert.com.br/main-agent/v1/auth"   --header "accept: application/json"   --header "Content-Type: application/json"   --data '{
+    "username": "<SEU_USUARIO>",
+    "password": "<SUA_SENHA>"
+  }'
+```
+
+### Resposta (200)
+```json
+{
+  "access_token": "<JWT>",
+  "token_type": "bearer",
+  "name": "Nome do Usuário",
+  "profile": 1,
+  "username": "<SEU_USUARIO>",
+  "id": 1
+}
+```
+
+## Uso do token
+
+Inclua o token no header **Authorization** em todas as chamadas:
+
+```http
+Authorization: Bearer &lt;JWT&gt;
+```

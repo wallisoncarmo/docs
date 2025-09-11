@@ -22,27 +22,24 @@
             ]
           },
           {
-            "group": "Customization",
+            "group": "Workflows",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "workflows/contestacao-infracao",
+              "workflows/litigancia-abusiva"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Agents",
+        "groups": [
           {
-            "group": "Writing content",
+            "group": "Catálogo",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "agents/contestacao-infracao",
+              "agents/litigancia-abusiva",
+              "agents/ocr",
+              "agents/transcricao"
             ]
           }
         ]
@@ -51,42 +48,41 @@
         "tab": "API reference",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Módulos",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/modules/introducao"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Autenticação",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/modules/authentication"
+            ]
+          },
+          {
+            "group": "Agentes",
+            "pages": [
+              "api-reference/modules/agents",
+              "api-reference/modules/tasks",
+              "api-reference/modules/status",
+              "api-reference/modules/download"
+            ]
+          },
+          {
+            "group": "Créditos",
+            "pages": [
+              "api-reference/modules/credits"
+            ]
+          },
+          {
+            "group": "Erros & Tratamento",
+            "pages": [
+              "api-reference/modules/errors"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
@@ -107,15 +103,15 @@
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {

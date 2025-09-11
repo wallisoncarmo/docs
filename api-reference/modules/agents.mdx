@@ -1,0 +1,47 @@
+---
+title: "Módulo — Catálogo de Agentes"
+description: "Como listar agentes e entender as chaves de execução (service_name_agent e service_name_task)."
+---
+
+# Catálogo de Agentes
+
+Use este módulo para **descobrir quais agentes e tarefas** estão disponíveis.
+
+## Listar agentes
+
+```
+GET /main-agent/v1/agent/
+```
+
+### Exemplo (cURL)
+```bash
+curl --location "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent/"   --header "accept: application/json"   --header "Authorization: Bearer <JWT>"
+```
+
+### Resposta (exemplo)
+```json
+[
+  {
+    "id": 1,
+    "service_name_agent": "contestacao_infracao",
+    "role": "Agente de Contestação de Infrações",
+    "description": "Agente especializado no julgamento de Infrações de trânsito",
+    "image": "/main-agent/static/agents/bd79558ebfeb43f8a3e080725f874b49_agente_regulador_transito.png",
+    "tasks": [
+      {
+        "id": 2,
+        "service_name_task": "contestacao",
+        "agent": { "id": 1, "role": "Agente de Contestação de Infrações" },
+        "title": "Contestação",
+        "default_message": "Para iniciar o processo de contestação preciso que me informe os documentos de CNH e infração",
+        "description": "Tarefa especializada para contestações de infrações de trânsito",
+        "doc_obrigatory": true
+      }
+    ],
+    "agent_type_ids": [2],
+    "default_message": "Olá!  Como posso ajudar hoje?"
+  }
+]
+```
+
+> As chaves **service_name_agent** e **service_name_task** são usadas para **montar a URL de execução** no módulo de Tarefas.

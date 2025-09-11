@@ -1,0 +1,38 @@
+---
+title: Upload — Contestação de Infração
+---
+
+# POST /main-agent/v1/agent-task/upload/contestacao_infracao/contestacao
+
+Enfileira a execução do agente de contestação com **multipart/form-data**.
+
+## Headers
+```http
+Authorization: Bearer <API_KEY>
+Content-Type: multipart/form-data
+```
+
+
+## Campos (multipart)
+- `procuracao` (file)
+- `crlv` (file)
+- `cnh` (file)
+- `alegacao2` (file)
+- `ait` (file)
+- `ait_radar_expirado` (file, opcional)
+
+## Response (200)
+```json
+{ "execution_id": "abc123" }
+
+
+Exemplo (cURL)
+
+curl -X POST "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-task/upload/contestacao_infracao/contestacao" \
+  -H "Authorization: Bearer $API_KEY" \
+  -F "procuracao=@/caminho/procuracao.pdf" \
+  -F "crlv=@/caminho/crlv.pdf" \
+  -F "cnh=@/caminho/cnh.pdf" \
+  -F "alegacao2=@/caminho/alegacao2.pdf" \
+  -F "ait=@/caminho/ait.pdf" \
+  -F "ait_radar_expirado=@/caminho/ait_radar.pdf"

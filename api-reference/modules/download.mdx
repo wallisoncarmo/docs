@@ -1,0 +1,29 @@
+---
+title: "Módulo — Download de Resultados"
+description: "Como baixar os artefatos finais (ex.: parecer em PDF) de uma execução."
+---
+
+# Download de Resultados
+
+Quando o status for `DONE`, você pode baixar o **resultado**.
+
+## Endpoint
+
+```
+GET /main-agent/v1/agent-message/download/{execution_id}
+```
+
+### Exemplo (cURL)
+```bash
+curl --location "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-message/download/<EXECUTION_ID>"   --header "accept: application/json"   --header "Authorization: Bearer <JWT>"   -o resultado.bin
+```
+
+### Resposta (JSON envelope, quando aplicável)
+```json
+{
+  "filename": "parecer.pdf",
+  "file": "<BASE64>"
+}
+```
+
+> Em alguns clientes/cURL, você pode receber o **arquivo binário** diretamente. Se vier como JSON com `file` em Base64, **decode** o conteúdo e salve como o `filename` informado.
