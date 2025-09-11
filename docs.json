@@ -11,10 +11,10 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Guias",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Primeiros Passos",
             "pages": [
               "index",
               "quickstart",
@@ -22,7 +22,7 @@
             ]
           },
           {
-            "group": "Workflows",
+            "group": "Fluxos",
             "pages": [
               "workflows/contestacao-infracao",
               "workflows/litigancia-abusiva"
@@ -31,13 +31,18 @@
         ]
       },
       {
-        "tab": "Agents",
+        "tab": "Catálogo",
         "groups": [
           {
-            "group": "Catálogo",
+            "group": "Agentes",
             "pages": [
               "agents/contestacao-infracao",
-              "agents/litigancia-abusiva",
+              "agents/litigancia-abusiva"
+            ]
+          },
+          {
+            "group": "Serviços",
+            "pages": [
               "agents/ocr",
               "agents/transcricao"
             ]
@@ -61,6 +66,15 @@
           },
           {
             "group": "Agentes",
+            "pages": [
+              "api-reference/modules/agents",
+              "api-reference/modules/tasks",
+              "api-reference/modules/status",
+              "api-reference/modules/download"
+            ]
+          },
+          {
+            "group": "Agentes de trânsito",
             "pages": [
               "api-reference/modules/agents",
               "api-reference/modules/tasks",
