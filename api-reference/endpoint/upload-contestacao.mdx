@@ -8,7 +8,7 @@ Enfileira a execução do agente de contestação com **multipart/form-data**.
 
 ## Headers
 ```http
-Authorization: Bearer <API_KEY>
+Authorization: Bearer <TOKEN>
 Content-Type: multipart/form-data
 ```
 
@@ -29,7 +29,7 @@ Content-Type: multipart/form-data
 Exemplo (cURL)
 
 curl -X POST "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-task/upload/contestacao_infracao/contestacao" \
-  -H "Authorization: Bearer $API_KEY" \
+  -H "Authorization: Bearer $TOKEN" \
   -F "procuracao=@/caminho/procuracao.pdf" \
   -F "crlv=@/caminho/crlv.pdf" \
   -F "cnh=@/caminho/cnh.pdf" \

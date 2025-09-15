@@ -1,14 +1,16 @@
 ---
 title: Transcrição de Áudio
+description: Converte arquivos de áudio em texto legível, com detecção de idioma (suporte a ```PT-BR```).
 ---
 
-Converte **áudio em texto** e gera um **resumo** subsequente.
+## O que faz
+- Transformar fala em texto para busca, análise e arquivamento.
 
 ## Entradas
-- Áudio: wav, mp3, m4a etc.
+- **Arquivos**: ```wav```/```mp3```/```m4a```/```ogg```/```webm```/```flac```
+- **Quantidade máxima**: ```1```
+- **Idioma**: detecção automática (padrão) ou forçado por parâmetro (ex.: pt).
 
 ## Saída
-- `transcript`: texto integral.
-- `summary`: síntese dos principais pontos.
-
-> Implementado com **OpenAI Whisper** no backend.
+- **Resultado**: Texto extraido.
+- **Formatos**: ```Texto```.

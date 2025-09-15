@@ -11,9 +11,9 @@ Atualmente disponíveis:
 - **Contestação de Infração de Trânsito** → gera **parecer jurídico em PDF** a partir de documentos obrigatórios.  
 - **Litigância Abusiva** → mede **similaridade** entre petições e **estatísticas** por advogado (OAB/Nome).  
 - **OCR** → extrai texto de PDFs/imagens.  
-- **Transcrição + Resumo** → converte áudio em texto (Whisper) e produz um resumo.
+- **Transcrição + Resumo** → converte áudio em texto.
 
-> Dica: nas páginas de *Workflows* você pode incluir **imagens do passo a passo** da interface.
+> Dica: nas páginas de *Fluxos* você pode incluir **imagens do passo a passo** da interface.
 
 ---
 
@@ -36,7 +36,7 @@ Atualmente disponíveis:
 
 - **API Key** no header:
 ```http
-Authorization: Bearer &lt;API_KEY&gt;
+Authorization: Bearer &lt;TOKEN&gt;
 ```
 
 - **Base URL (produção):**
@@ -58,7 +58,7 @@ Documentos aceitos pelo agente `contestacao_infracao` (tarefa `contestacao`):
 - `procuracao`, `crlv`, `cnh`, `alegacao2`, `ait`, `ait_radar_expirado` (opcional conforme o caso).
 
 ```bash
-curl -X POST "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-task/upload/contestacao_infracao/contestacao"   -H "Authorization: Bearer $API_KEY"   -F "procuracao=@/caminho/procuracao.pdf"   -F "crlv=@/caminho/crlv.pdf"   -F "cnh=@/caminho/cnh.pdf"   -F "alegacao2=@/caminho/alegacao2.pdf"   -F "ait=@/caminho/ait.pdf"   -F "ait_radar_expirado=@/caminho/ait_radar.pdf"
+curl -X POST "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-task/upload/contestacao_infracao/contestacao"   -H "Authorization: Bearer $TOKEN"   -F "procuracao=@/caminho/procuracao.pdf"   -F "crlv=@/caminho/crlv.pdf"   -F "cnh=@/caminho/cnh.pdf"   -F "alegacao2=@/caminho/alegacao2.pdf"   -F "ait=@/caminho/ait.pdf"   -F "ait_radar_expirado=@/caminho/ait_radar.pdf"
 ```
 
 **Resposta**
@@ -68,7 +68,7 @@ curl -X POST "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-ta
 
 ### 2) Consultar status
 ```bash
-curl -H "Authorization: Bearer $API_KEY"   "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-message/process/abc123"
+curl -H "Authorization: Bearer $TOKEN"   "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-message/process/abc123"
 ```
 
 Exemplos de resposta:
@@ -87,7 +87,7 @@ Exemplos de resposta:
 
 ### 3) Download do parecer (PDF)
 ```bash
-curl -L -H "Authorization: Bearer $API_KEY"   -o parecer.pdf   "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-message/download/abc123"
+curl -L -H "Authorization: Bearer $TOKEN"   -o parecer.pdf   "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-message/download/abc123"
 ```
 
 > Endpoints detalhados:  

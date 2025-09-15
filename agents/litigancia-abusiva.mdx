@@ -1,15 +1,28 @@
 ---
-title: Litigância Abusiva
-description: Similaridade entre petições e estatísticas por advogado (OAB/Nome).
+title: Litigância Abusiva — Similaridade entre Petições
+description: Mede similaridade entre petições e retorna pontuação, rótulo e justificativas.
 ---
 
-Identifica indícios de litigância abusiva por **análise semântica** de documentos e **padrões comportamentais**.
+## O que faz
+- Compara 2 ou mais petições iniciais para identificar proximidade textual e padrões de repetição.
+- Aplica abordagem híbrida (vetorial + lexical) para robustez contra variações de redação e cópias literais.
+- Retorna pares similares com score, rótulo (ex.: semelhante/não semelhante) e justificativas (quando habilitado).
 
-## Feature 1 — Similaridade entre petições
-- **Entrada**: conjunto de petições iniciais.
-- **Saída**: grau de similaridade (pares ou matriz) + **texto jurídico de referência** (base padronizada).
+## Entradas
+- **Arquivos**:```PDF```/```JPG```/```PNG```/```TXT```
+- **Quantidade mínima**: ```2```
+- **Quantidade máxima**:  ```10```
 
-## Feature 2 — Extração de Advogados
-- **Saída**: entidades **Advogado** (OAB/Nome) e **volume de processos por advogado**.
+## Entradas Opcional (query)
+- **similarity_threshold**: Limiar para considerar par “semelhante” (padrão: 0.6 recomendado).
+- **top_k**: Máximo de pares retornados/considerados.
+- **min_score**: Descarta pares abaixo deste valor.
+- **max_explanations**: Quantidade de pares com explicação via LLM.
+- **include_details**: Inclui bloco técnico de auditoria (details).
+- **hybrid_alpha**: Peso da componente vetorial na combinação (0–1), quando exposto.
 
-> No Item 1, associe um **texto jurídico de referência** à saída (você poderá editar aqui o texto-base quando tiver o conteúdo final).
+## Saída
+- **Resultado**: Parecer sobre a anlise dos documentos.
+- **Formatos**: ```Texto```.
+
+

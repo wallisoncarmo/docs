@@ -33,7 +33,7 @@ POST /main-agent/v1/agent-task/upload/{agent}/{task}
 GET /main-agent/v1/agent-message/process/{execution_id}
 ```
 
-3. **Baixe o resultado** quando o status for `DONE`:
+3. **Baixe o resultado** quando o status for `Completo`:
 
 ```bash
 GET /main-agent/v1/agent-message/download/{execution_id}
@@ -44,7 +44,7 @@ GET /main-agent/v1/agent-message/download/{execution_id}
 ## Exemplo completo (Contestação de Infração)
 
 ```bash
-curl -X POST "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-task/upload/contestacao_infracao/contestacao"   -H "Authorization: Bearer $API_KEY"   -F "procuracao=@/caminho/procuracao.pdf"   -F "crlv=@/caminho/crlv.pdf"   -F "cnh=@/caminho/cnh.pdf"   -F "alegacao2=@/caminho/alegacao2.pdf"   -F "ait=@/caminho/ait.pdf"   -F "ait_radar_expirado=@/caminho/ait_radar.pdf"
+curl -X POST "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-task/upload/contestacao_infracao/contestacao"   -H "Authorization: Bearer $TOKEN"   -F "procuracao=@/caminho/procuracao.pdf"   -F "crlv=@/caminho/crlv.pdf"   -F "cnh=@/caminho/cnh.pdf"   -F "alegacao2=@/caminho/alegacao2.pdf"   -F "ait=@/caminho/ait.pdf"   -F "ait_radar_expirado=@/caminho/ait_radar.pdf"
 ```
 
 Resposta:
@@ -54,5 +54,5 @@ Resposta:
 
 Depois:
 ```bash
-curl -L -H "Authorization: Bearer $API_KEY"   -o parecer.pdf   "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-message/download/abc123"
+curl -L -H "Authorization: Bearer $TOKEN"   -o parecer.pdf   "https://agents-store-api.alfred.vert.com.br/main-agent/v1/agent-message/download/abc123"
 ```

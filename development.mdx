@@ -3,7 +3,7 @@ title: "Desenvolvedor"
 description: "Guia para desenvolvedores que desejam integrar ou expandir o uso do Main Agents Store."
 ---
 
-Este guia é voltado para desenvolvedores que desejam **integrar o Main Agents Store** em seus sistemas ou contribuir com novas funcionalidades.
+Este guia é voltado para desenvolvedores que desejam **integrar o Main Agents Store** em seus sistemas.
 
 ---
 
@@ -21,25 +21,52 @@ Este guia é voltado para desenvolvedores que desejam **integrar o Main Agents S
 
 - Autenticação:  
   ```http
-  Authorization: Bearer <API_KEY>
+  Authorization: Bearer <TOKEN>
   ```
 
 ---
 
 ## Boas práticas de integração
 
-- Utilize **polling** com intervalos de 2–5 segundos para consultar o status (`/agent-message/process/{execution_id}`).
-- Sempre trate erros (`400`, `401`, `404`, `422`, `500`).
-- Para tarefas pesadas (ex.: Litigância Abusiva com muitos documentos), considere **processar em lote** e monitorar tempos de resposta.
+- **Polling**: Quando o processamento for assíncrono, consulte o status em intervalos de 2–5 segundos (ex.: /agent-message/process/{execution_id}).
+- **Rastreabilidade**: Envie um identificador único por requisição (ex.: x-request-id) para correlação em logs e auditoria.
+- **Tratamento de erros**: Trate respostas 400, 401, 404, 422, 500 e use mensagens de erro para orientar retries ou correções.
+- **Carga**: Para tarefas pesadas (ex.: Litigância Abusiva com muitos documentos), considere processar em lote, acompanhar tempos de resposta e aplicar backoff em novas submissões.
 
 ---
 
 ## Fluxo de desenvolvimento típico
 
-1. Configure sua **API Key** em variáveis de ambiente.  
-2. Crie funções utilitárias para:
-   - Upload de documentos
-   - Polling de status
-   - Download de resultados
-3. Escreva testes automatizados para garantir que seus documentos estão no formato correto antes de enviar.  
-4. Documente os fluxos específicos de cada agente no seu sistema.
+1. **Provisionamento de credenciais**
+Solicite/crie usuário e senha no ambiente alvo (homologação/produção) e armazene de forma segura.
+2. **Autenticação**
+Faça login com usuário/senha e guarde o access token (JWT) retornado. Quando aplicável, use também refresh token para renovar sessões sem pedir credenciais novamente.
+3. **Preparação de documentos**
+- Verifique formatos aceitos (ex.: ```PDF```, ```TXT```, ```imagens```) e tamanho máximo por arquivo/lote (definido pela sua instância).
+- Garanta encoding e legibilidade (ex.: UTF-8 para textos).
+4. **Envio ao agente**
+- Envie os arquivos via ```multipart/form-data```, no campo esperado (ex.: files).
+- Inclua parâmetros do agente na querystring quando aplicável.
+- Utilize o header   ```Authorization: Bearer <TOKEN>``` e, se possível, ```x-request-id```.
+5. **Acompanhamento (polling)**
+- Caso o retorno seja assíncrono, consulte o status pelo identificador de execução até ```completo``` ou ```erro```.
+- Ajuste o intervalo do polling para 2–5s para balancear latência e carga.
+6. **Resultados**
+- Ao concluir, recupere a saída do agente (ex.: campo report).
+- Quando o relatório vier em Base64, faça a decodificação e armazene no seu repositório de documentos (ex.: ```PDF```).
+7. **Erros e reprocessos**
+- Respeite mensagens e códigos de erro para corrigir formato/parametrização.
+- Em falhas transitórias, aplique retry com backoff.
+- Em falhas definitivas (ex.: validação), ajuste o insumo antes de reenviar.
+
+## Convenções e recomendações
+
+**Headers mínimos**: ```Authorization: Bearer <TOKEN>```, ```accept: application/json```, ```x-request-id``` (recomendado).
+**Parâmetros por agente**: cada agente define seus próprios parâmetros (ex.: limiares de similaridade, flags de detalhamento, limites de explicações). Consulte a documentação específica do agente.
+**Limites**: tamanhos máximos e quantidade de arquivos por chamada podem variar por ambiente/instância. Verifique com o time responsável.
+**Segurança**: proteja credenciais e tokens; siga o princípio do menor privilégio; efetue rotação periódica de senhas quando aplicável.
+
+## Próximos passos
+- Consulte as páginas de **Fluxos** para ver o passo a passo específico de cada agente.
+- Consulte os nossos **Catálogos** para ver os agentes e serviço disponíveis.
+- Em caso de dúvidas operacionais, acione o time responsável pelo ambiente.

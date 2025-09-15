@@ -1,13 +1,18 @@
 ---
 title: OCR
+description: Converte PDFs, imagens e arquivos de texto em conteúdo pesquisável. Ideal para digitalizações (```PDF/imagem```) e notas soltas (```TXT```), com suporte a ```PT-BR``` e outros idiomas.
 ---
 
-Extrai texto de imagens/PDFs.
+## O que faz
+- Recebe uma ou mais entradas (```PDF```, ```PNG```/```JPG```, ```TXT```).
+- Executa ```OCR``` em ```PDFs``` sem camada de texto ou em imagens.
+- Para ```TXT```, realiza normalização/validação e inclui o conteúdo no resultado.
+- Retorna o texto extraído, idioma detectado (quando aplicável) e metadados básicos.
 
 ## Entradas
-- Formatos: PDF/JPG/PNG.
-- Parâmetros opcionais: idioma, páginas, rotação.
+- **Arquivos**:```PDF```/```JPG```/```PNG```.
+- **Quantidade máxima**: ```10```
 
 ## Saída
-- Texto bruto (e coordenadas quando disponível).
-- Formatos: JSON/Texto.
+- **Resultado**: Lista de arquivos com seus texto extraídos.
+- **Formatos**: ```Lista``` de ```texto``` extraído.

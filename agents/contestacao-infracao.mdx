@@ -1,21 +1,23 @@
 ---
 title: Contestação de Infração
-description: Gera parecer jurídico em PDF a partir dos documentos fornecidos.
+description: Gera parecer jurídico em ```PDF``` a partir de alegação, AIT e documentos complementares; retorna decisão, justificativa.
 ---
 
-O agente **contestacao_infracao** produz um **parecer jurídico em PDF** para defesa/contestação de multas.
+## O que faz
+- Consolida documentos do caso e gera **parecer jurídico** (```PDF```) para defesa/contestação.
+- Analisa **Alegação + AIT + CNH** e, quando fornecidos, **documentos complementares** (laudos/BOs).
+- Suporta linhas de análise especializadas (ex.: **Velocidade** e **Rodízio**).
+- Retorna **decisão** (```DEFERIDO``` | ```INDEFERIDO``` | ```TRIAGEM_HUMANA```), **justificativa**, **confiança** e **tempo de processamento**.
 
-## Documentos exigidos
-- **procuracao** (PDF)
-- **crlv** (PDF)
-- **cnh** (PDF)
-- **alegacao2** (PDF com a alegação do caso)
-- **ait** (PDF do Auto de Infração)
-- **ait_radar_expirado** (PDF, quando aplicável)
-
-## Formas de envio
-- **Interface Web (UI)**: upload dos arquivos pelo fluxo guiado.
-- **API**: `POST /main-agent/v1/agent-task/upload/contestacao_infracao/contestacao`.
+## Entradas
+- **Arquivos**: ```PDF```/```IMG```/```TXT``` (conforme cada documento).
+- **Campos principais**:
+  - **Alegação**: texto (```TXT```/formulário).
+  - **AIT**: ```PDF```/```TXT``` (conforme disponibilidade).
+  - **CNH**: ```PDF```/```IMG```.
+- **Opcionais**: documentos complementares (laudos/BOs).
+- **Quantidade**: ```3+``` (consulte requisitos por linha de análise).
 
 ## Saída
-- **parecer.pdf** (download via `GET /agent-message/download/{execution_id}`).
+- **Resultado**: ```decisão``` (```DEFERIDO``` | ```INDEFERIDO``` | ```TRIAGEM_HUMANA```), ```justificativa```, ```confiança```, ```tempo_de_processamento``` e, quando aplicável, **```parecer.pdf```**.
+- **Formatos**: jutificativa (```TXT```) + parecer (```PDF```).
