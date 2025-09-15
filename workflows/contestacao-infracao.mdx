@@ -2,20 +2,88 @@
 title:Contestação de Infração
 ---
 
+Gera parecer jurídico em ```PDF``` a partir de alegação, AIT e documentos complementares; retorna decisão, justificativa.
+
 ## Pela Interface (UI)
-1. Abra o módulo **Contestação de Infrações**.
-2. Envie os documentos exigidos.
-3. Acompanhe o **status** da execução na tela.
-4. Faça o **download do parecer.pdf** ao concluir.
+### 1. Página Inicial
+Essa é a tela inicial aonde irá mostrar todos os agentes disponiveis.
+<Frame>
+  <img src="/images/workflow/pagina_inicial.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />  
+</Frame>
 
-> Dica: inclua aqui **imagens do fluxo** (upload, progresso e download).
+### 2. Seleção da tarefa do agente
 
-## Pela API (resumo)
-1) **Upload**  
+Exitem duas formas de iniciar as tarefas de agente podendo elas podem ser por:
+
+Que selecionar diretamente o agente
+<Frame>
+  <img src="/images/workflow/contestacao/agente.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />  
+</Frame>
+
+Mas tambem é possivel ir direto na tarefa
+<Frame>
+  <img src="/images/workflow/contestacao/tarefa.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />  
+</Frame>
+
+### 3. Tarefa do agente.
+Após iniciar a terefa do agente irá para uma conversa com ele aonde ele irá dizer os dados que ele precisa e voce pode interagir tirando suas duvias antes do processamento.
+<Frame>
+  <img src="/images/workflow/contestacao/chat.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />  
+</Frame>
+
+### 4. Iniciando tarefa 
+Para iniciar a terefa de contestação é preciso que seja informado os arquivos necessários. para iniciar o processo clique no botao de anexo ao lado do campo de mensagem.
+<Frame>
+  <img src="/images/workflow/botao_anexo.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />  
+</Frame>
+
+Irá abrir uma tela aonde devesse enviar os documentos necessários
+<Frame>
+  <img src="/images/workflow/upload.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />  
+</Frame>
+
+Adicionando os documentos é possivel excluir ou enviar para o agente
+<Frame>
+  <img src="/images/workflow/upload_itens.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />  
+</Frame>
+
+### 5. Processamento
+Acompanhe o processamento do agente pela barra de progresso no lado superior direito da tela
+<Frame>
+  <img src="/images/workflow/process.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />  
+</Frame>
+
+### 6. Resultado
+Após o processamento o agente ira sinalizar que foi concluido com uma mensagem no canto superior direito
+<Frame>
+  <img src="/images/workflow/process_sucess.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />  
+</Frame>
+
+O agente irá apresentar sua analise sobre a execução da tarefa solicitada além do documento de parecer.
+<Frame>
+  <img src="/images/workflow/contestacao/result_chat.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />  
+</Frame>
+
+Clicando em análise irá iniciar o download do pdf da analise
+<Frame>
+  <img src="/images/workflow/contestacao/download.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />  
+</Frame>
+
+O conteudo da analise vem em formato de pdf e será apresentada da seguinte forma
+<Frame>
+  <img src="/images/workflow/contestacao/parecer.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />  
+</Frame>
+
+
+## Pela API 
+### 1. **Tarefa**
+Para iniciar a tarerefa de um agent via servico se inicia com o endpoint  
 `POST /main-agent/v1/agent-task/upload/contestacao_infracao/contestacao`
 
-2) **Status**  
-`GET /main-agent/v1/agent-message/process/{execution_id}`
+### 2. **Status**
+Consulta o status da tarefa  
+```GET /main-agent/v1/agent-message/process/{execution_id}```
 
-3) **Download (PDF)**  
-`GET /main-agent/v1/agent-message/download/{execution_id}`
+### 3. **Download (PDF)**  
+Após a conclusão ira ser disponibilizado um download do parecer  
+```GET /main-agent/v1/agent-message/download/{execution_id}```
